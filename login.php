@@ -14,11 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Cek pengguna di database
-    if ($stmt = $conn->prepare("SELECT * FROM user WHERE email_user = :email")){
+    if ($stmt = $db->prepare("SELECT * FROM user WHERE email_user = ?")){
         
-        $stmt->bindParam(':email', $email);
+        $stmt->bind_param('s', $email);
         $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
 
         if ($user && password_verify($password, $user['pass_user'])) {
             $payload = [
