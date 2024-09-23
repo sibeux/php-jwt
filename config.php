@@ -1,14 +1,8 @@
 <?php
+// config.php
+$host = 'localhost';
+$db_name = 'sibe5579_cbux';
+$username = '1NvgEHFnwvDN96';
+$password = 'sibe5579_sihalal';
 
-define('HOST', 'localhost');
-define('SIBEUX', 'sibe5579_cbux');
-define('pass', '1NvgEHFnwvDN96');
-define('DB', 'sibe5579_sihalal');
-
-$db = new mysqli(HOST, SIBEUX, pass, DB);
-
-if ($db->connect_errno) {
-    die('Tidak dapat terhubung ke database');
-}
-
-$db->set_charset('utf8mb4');
+$conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
